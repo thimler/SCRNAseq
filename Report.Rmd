@@ -7,6 +7,12 @@ author:
 - Léo Sumi
 date: "March 2019"
 output: html_document
+
+knit: (function(input_file, encoding) {
+    out_dir <- 'docs';
+    rmarkdown::render(input_file,
+      encoding=encoding,
+      output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 ---
 
 ```{r setup, include=FALSE}
@@ -140,13 +146,16 @@ On the heatmap, we can see that the first two clusters are quite close to each o
 We found that TPH2 (Tryptophan hydroxylase 2), SPARC (Osteonectin), FABP4 (Fatty Acid-Binding Protein 4), and ACTC1 (Actin Alpha Cardiac Muscle 1) were the most differentially expressed genes for each individual cluster. When we plot their expression on the PCA, they clearly belong to the different cell types we have identified. It is interesting to note that SPARC is expressed by all clusters but one, because of a negative fold change value. The first differentially expressed gene with a positive fold change in this cluster is RGS4 (Regulator of G protein Signalling 4), and we have represented this as well on the plot.
 A red dot means that the gene is more express in the corresponding cell.   Intensity is calculated as log10(expression+1) and normalized to the maximum expression level.
 
+```{r pca, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/pca3d.jpg")
+```
+  
+```{r DE, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/DEgenes.gif")
+```
 
-![pca3d](../data/pca3d.jpg)  
-(nb: please run the .rmd file to have access to the 3d interactive plot. We were not able to embed it in the html output)
 
-![DE genes](../data/DEgenes.gif)
-
-```{r DE genes, include=FALSE}
+```{r DE, genes, include=FALSE}
 # DE Genes
 
 #Find genes most important to explain first PC
@@ -262,20 +271,44 @@ For the sake of the Enrichment analysis, one must only take DE genes that are mo
 
 Cluster 1:  
 
-![Cell type for cluster 1](../data/C1_type.jpg)
-![Cell type for cluster 1](../data/Enrich4.jpeg)
+```{r cl1, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/C1_type.jpg")
+```
+
+```{r enrcihcl1, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/Enrich4.jpeg")
+```
+
 
 Cluster 2:  
-![Cell type for cluster 2](../data/C2_type.jpg)
-![Cell type for cluster 2](../data/Enrich3.jpeg)
+```{r cl2, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/C2_type.jpg")
+```
 
-Cluster 3:  
-![Cell type for cluster 3](../data/C3_type.jpg)
-![Cell type for cluster 3](../data/Enrich2.jpeg)
+```{r enrichcl2, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/Enrich3.jpeg")
+```
 
-Cluster 4:  
-![Cell type for cluster 4](../data/C4_type.jpg)
-![Cell type for cluster 4](../data/Enrich1.jpeg)
+
+Cluster 3: 
+```{r cl3, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/C3_type.jpg")
+```
+
+```{r enrichcl3, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/Enrich2.jpeg")
+```
+
+
+Cluster 4:
+```{r cl4, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/C4_type.jpg")
+```
+
+```{r enrichcl1, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("data/Enrich1.jpeg")
+```
+
 
 ## Conclusion
 
